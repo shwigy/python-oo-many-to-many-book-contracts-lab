@@ -1,8 +1,29 @@
 # Many-to-many Object Relationships Lab
 
-Now that we have learned about several types of relationships it's time to build 
-one of our own. In this lab you will be creating a many-to many relationship in 
-python 
+A small Python model for building contracts between books and authors. It
+demonstrates a many-to-many relationship: authors can have many books through
+contracts, and books can have many authors through contracts.
+
+## What it does
+
+- `Author(name)` — has `contracts()`, `books()`, `sign_contract(book, date, royalties)`,
+  and `total_royalties()`.
+- `Book(title)` — has `contracts()` and `authors()`.
+- `Contract(author, book, date, royalties)` — the join between `Author` and `Book`.
+  Validates that `author` is an `Author`, `book` is a `Book`, `date` is a `str`,
+  and `royalties` is an `int`. Also has `Contract.contracts_by_date(date)`.
+
+```python
+from many_to_many import Author, Book
+
+author = Author("Octavia Butler")
+book = Book("Kindred")
+contract = author.sign_contract(book, "01/01/2001", 50000)
+
+author.books()            # [<Book: Kindred>]
+book.authors()            # [<Author: Octavia Butler>]
+author.total_royalties()  # 50000
+```
 
 ## The Scenario 
 
